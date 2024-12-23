@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "Attach rails-web with rdbg",
+      "request": "attach",
+
+      // remove the following "preLaunchTask" if you do not wish to stop and start
+      // GitLab via VS Code but manually on a separate terminal.
+      "preLaunchTask": "start rdbg for rails-web"
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach rails-background-jobs with rdbg",
+      "request": "attach",
+
+      // remove the following "preLaunchTask" if you do not wish to stop and start
+      // GitLab via VS Code but manually on a separate terminal.
+      "preLaunchTask": "start rdbg for rails-background-jobs"
+    }
+  ]
+}

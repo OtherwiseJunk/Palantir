@@ -1,0 +1,41 @@
+<h1>Out Of Context Images</h1>
+
+<% if @ooc_entries.any? %>
+  <div class="ooc-gallery">
+    <% @ooc_entries.each do |entry| %>
+      <div class="ooc-item">
+        <div onclick="openOverlay('<%= entry["imageUrl"] %>')">
+          <%= image_tag entry["imageUrl"], alt: "Image for item #{entry["itemID"]}", class: 'ooc-image', loading: 'lazy'%>
+        </div>
+        <div class="info-bar">
+            <% formatted_date = Date.parse(entry["dateStored"]).strftime("%B %d, %Y") %>
+            <p><strong><%= entry["itemID"] %></strong> - Reported by <strong><%= entry["display_name"] %></strong> on <strong><%= formatted_date %></strong></p>
+        </div>
+        <% if current_user.id == entry["reportingUserId"] || current_user.admin || current_user.owner%>
+          <%= button_to "Delete", out_of_context_path(entry['itemID']),
+                        method: :delete, 
+                        data: { turbo_confirm: "Are you sure you want to delete this item (#{entry['itemID']})?" } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div id="imageOverlay" class="overlay" onclick="closeOverlay()">
+    <img id="overlayImage" class="overlay-image" src="" alt="Full Image">
+  </div>
+<% else %>
+  <p>No out-of-context images available.</p>
+<% end %>
+
+<script>
+function openOverlay(imageUrl) {
+  const overlay = document.getElementById('imageOverlay');
+  const overlayImage = document.getElementById('overlayImage');
+  overlayImage.src = imageUrl;
+  overlay.style.display = 'flex';
+}
+
+function closeOverlay() {
+  const overlay = document.getElementById('imageOverlay');
+  overlay.style.display = 'none';
+}
+</script>

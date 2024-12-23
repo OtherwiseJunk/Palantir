@@ -1,0 +1,107 @@
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.nav-container .header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container .header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.nav-container .header .avatar {
+    border-radius: 50%;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.nav-container .sidebar {
+    background-color: #222;
+    color: white;
+    width: 200px;
+    padding: 20px 10px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+}
+
+.nav-container .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-container .sidebar li {
+    margin-bottom: 10px;
+}
+
+.nav-container .sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container .sidebar a:hover {
+    text-decoration: underline;
+}
+
+.nav-container .main-content {
+    margin-left: 200px;
+    margin-top: 30px;
+    padding: 20px;
+    width: calc(100% - 200px);
+}
+
+.ooc-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.ooc-item {
+    flex: 1 1 200px;
+    text-align: center;
+}
+
+.ooc-item img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.overlay:active {
+    display: none;
+}

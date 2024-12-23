@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palantir</title>
+  <%= stylesheet_link_tag 'landing_page', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+  <canvas id="backgroundCanvas"></canvas>
+  <div class="container">
+    <img src="<%= asset_path 'logo.png' %>" alt="Cache Blaster Logo" class="icon">
+    <h1>Palantir</h1>
+    <%= button_to "Log in with Discord", user_discord_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "btn" %>
+  </div>
+</body>
+</html>
