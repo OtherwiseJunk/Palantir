@@ -272,7 +272,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :discord, ENV["DISCORD_CLIENT_ID"], ENV["DISCORD_CLIENT_SECRET"], scope: "identify email guilds", redirect_uri: 'http://localhost:3000/users/auth/discord/callback'
+  config.omniauth :discord, ENV["DISCORD_CLIENT_ID"], ENV["DISCORD_CLIENT_SECRET"], scope: "identify email guilds", redirect_uri: ENV['DISCORD_REDIRECT_URI']
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 
   # ==> Warden configuration

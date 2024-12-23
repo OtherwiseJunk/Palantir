@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    environment:
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN}
+      OWNER_EMAIL: ${OWNER_EMAIL}
+      AUTH0CLIENTID: ${AUTH0CLIENTID}
+      AUTH0CLIENTSECRET: ${AUTH0CLIENTSECRET}
+      AUTH0AUDIENCE: ${AUTH0AUDIENCE}
+      AUTH0GRANTTYPE: ${AUTH0GRANTTYPE}
+      AUTH0SCOPE: ${AUTH0SCOPE}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: palantir_production
+      DISCORD_REDIRECT_URI: https://palantir.cacheblasters.com/users/auth/discord/callback
+    ports:
+      - "3000:80"
+
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./create-db-user.sql:/docker-entrypoint-initdb.d/create-db-user.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
