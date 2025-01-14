@@ -1,0 +1,86 @@
+<h1>Libcoin Transactions</h1>
+
+<div class="transactions">
+  <% @transactions.each do |transaction| %>
+    <div class="transaction <%= transaction['receivingUser'] == "You" ? 'received' : 'sent' %>">
+      <div class="transaction-header">
+        <h4 class="transaction-from">From: <%= transaction['sendingUser'] %></h4>
+        <h4 class="transaction-to">To: <%= transaction['receivingUser'] %></h4>
+      </div>
+      <div class="transaction-content">
+        <h2 class="transaction-amount"><%= transaction['amount'] %></h2>
+        <% if transaction['transactionMessage'].present? %>
+          <h3 class="transaction-message">"<%= transaction['transactionMessage'] %>"</h3>
+        <% end %>
+      </div>
+      <div class="transaction-footer">
+        <p class="transaction-id"><%= transaction['id'] %></p>
+        <p class="transaction-date"><%= DateTime.parse(transaction['transactionDate']).strftime("%b %d, %Y %H:%M") %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="pagination">
+  <% if @page_number > 1 %>
+    <%= link_to 'Previous', libcoin_transactions_path(pageNumber: @page_number - 1, pageSize: @page_size) %>
+  <% end %>
+  <%= link_to 'Next', libcoin_transactions_path(pageNumber: @page_number + 1, pageSize: @page_size) %>
+</div>
+
+<style>
+  .transactions {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .transaction {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .transaction.received {
+    border-color: green;
+  }
+  .transaction.sent {
+    border-color: red;
+  }
+  .transaction-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .transaction-from {
+    text-align: left;
+  }
+  .transaction-to {
+    text-align: right;
+  }
+  .transaction-content {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .transaction-amount {
+    margin: 0;
+  }
+  .transaction-message {
+    margin: 0;
+    font-style: italic;
+  }
+  .transaction-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #666;
+  }
+  .transaction-id {
+    text-align: left;
+  }
+  .transaction-date {
+    text-align: right;
+  }
+  .pagination {
+    margin-top: 20px;
+  }
+</style>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "libcoin_transactions/index"
   get "errors/access_denied"
   get "dashboard/index"
   get "home/index"
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   get "errors/access_denied", to: "errors#access_denied", as: "access_denied"
   delete 'logout', to: 'application#sign_out_current_user', as: 'logout'
   resources :out_of_context, only: [:index, :destroy]
+  resources :libcoin_transactions, only: [:index]
 
   authenticated :user do
     root to: "dashboard#index", as: :authenticated_root

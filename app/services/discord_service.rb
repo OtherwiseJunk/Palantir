@@ -56,6 +56,37 @@ class DiscordService
     ooc_item
   end
 
+  def map_transaction_user_ids_to_names(transaction, current_user)
+    receiving_user_id = transaction["receivingUser"]
+    sending_user_id = transaction["sendingUser"]
+
+    puts "Receiving Before: #{receiving_user_id}"
+    puts "Sending Before: #{sending_user_id}"
+    puts "Is receiving name already a string?: #{receiving_user_id.to_i.to_s != receiving_user_id}"
+    puts "Is sending name already a string?: #{sending_user_id.to_i.to_s != sending_user_id}"
+
+    if receiving_user_id.to_i.to_s == receiving_user_id
+      transaction["receivingUser"] = if receiving_user_id == current_user.id.to_s
+                                       "You"
+                                     else
+                                       fetch_user_display_name(receiving_user_id)
+                                     end
+    end
+
+    if sending_user_id.to_i.to_s == sending_user_id
+      transaction["sendingUser"] = if sending_user_id == current_user.id.to_s
+                                     "You"
+                                   else
+                                     fetch_user_display_name(sending_user_id)
+                                   end
+    end
+
+    puts "Receiving After: #{transaction["receivingUser"]}"
+    puts "Sending After: #{transaction["sendingUser"]}"
+    puts "------------------------------------------------------------------"
+
+    transaction
+  end
 
   def fetch_user_display_name(user_id)
     return @cache[user_id] if @cache.key?(user_id)
