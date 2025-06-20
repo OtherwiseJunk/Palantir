@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   delete "logout", to: "application#sign_out_current_user", as: "logout"
   resources :out_of_context, only: [ :index, :destroy ]
   resources :libcoin_transactions, only: [ :index ]
+  resources :high_rollers, only: [ :index ]
 
   authenticated :user do
     root to: "dashboard#index", as: :authenticated_root
