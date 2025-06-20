@@ -6,10 +6,19 @@
   <div class="high-rollers-grid">
     <% @casino_user_stats.each do |stat| %>
       <div class="high-roller-card">
-        <h3><%= stat[:display_name] %></h3>
-        <p>Winnings: <span class="stat-winnings"><%= stat[:winnings] %></span></p>
-        <p>Losses: <span class="stat-losses"><%= stat[:losses] %></span></p>
-        <p>Net: <span class="<%= stat[:net] >= 0 ? 'stat-winnings' : 'stat-losses' %>"><%= stat[:net] %></span></p>
+        <h3 class="card-title"><%= stat[:display_name] %></h3>
+        <p class="stat-line">
+          <span class="stat-label">Winnings:</span>
+          <span class="stat-value stat-winnings"><%= stat[:winnings] %></span>
+        </p>
+        <p class="stat-line">
+          <span class="stat-label">Losses:</span>
+          <span class="stat-value stat-losses"><%= stat[:losses] %></span>
+        </p>
+        <p class="stat-line">
+          <span class="stat-label">Net:</span>
+          <span class="stat-value <%= stat[:net] >= 0 ? 'stat-winnings' : 'stat-losses' %>"><%= stat[:net] %></span>
+        </p>
       </div>
     <% end %>
   </div>
@@ -18,35 +27,36 @@
 <style>
   .high-rollers-grid {
     display: grid;
-    /* Creates responsive columns: as many as fit, each at least 250px wide */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px; /* Space between cards */
-    padding: 20px 0; /* Padding around the grid */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
   }
   .high-roller-card {
-    border: 1px solid #e0e0e0; /* Lighter border */
-    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #008800;
+    border-radius: 8px;
     padding: 15px;
-    background-color: #ffffff; /* White background for cards */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Subtle shadow */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   }
-  .high-roller-card h3 {
+  .high-roller-card .card-title {
     margin-top: 0;
-    margin-bottom: 12px; /* Space below title */
-    color: #333; /* Darker text for title */
-    font-size: 1.1em; /* Slightly smaller user ID */
-    word-break: break-all; /* Prevent long IDs from breaking layout */
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    word-break: break-all;
   }
-  .high-roller-card p {
+  .high-roller-card .stat-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 8px 0;
-    font-size: 1em; /* Standard paragraph size */
+    font-size: 1em;
+  }
+  .high-roller-card .stat-value {
+    font-weight: bold;
   }
   .stat-winnings {
-    color: #28a745; /* Bootstrap success green */
-    font-weight: bold;
+    color: #28a745;
   }
   .stat-losses {
-    color: #dc3545; /* Bootstrap danger red */
-    font-weight: bold;
+    color: #dc3545;
   }
 </style>
