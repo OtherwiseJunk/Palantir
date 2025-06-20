@@ -14,6 +14,8 @@
           card_class += " silver-medal"
         when 2
           card_class += " bronze-medal"
+        else
+          card_class += " negative-net-card" if stat[:net].negative?
         end
       %>
       <div class="<%= card_class %>">
@@ -47,7 +49,7 @@
     padding: 20px 0;
   }
   .high-roller-card {
-    border: 2px solid #008800;
+    border: 2px solid #28a745;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
@@ -63,6 +65,9 @@
   .high-roller-card.bronze-medal {
     border-color: #CD7F32;
     box-shadow: 0 0 8px rgba(205, 127, 50, 0.5);
+  }
+  .high-roller-card.negative-net-card {
+    border-color: #dc3545;
   }
   .high-roller-card .card-title {
     text-align: center;
