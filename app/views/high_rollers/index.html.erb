@@ -4,8 +4,19 @@
   <p>No casino activity found to display.</p>
 <% else %>
   <div class="high-rollers-grid">
-    <% @casino_user_stats.each do |stat| %>
-      <div class="high-roller-card">
+  <% @casino_user_stats.each_with_index do |stat, index| %>
+      <%
+        card_class = "high-roller-card"
+        case index
+        when 0
+          card_class += " gold-medal"
+        when 1
+          card_class += " silver-medal"
+        when 2
+          card_class += " bronze-medal"
+        end
+      %>
+      <div class="<%= card_class %>">
         <h3 class="card-title"><%= stat[:display_name] %></h3>
         <p class="stat-line">
           <span class="stat-label">Winnings:</span>
@@ -36,10 +47,22 @@
     padding: 20px 0;
   }
   .high-roller-card {
-    border: 1px solid #008800;
+    border: 2px solid #008800;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  }
+    .high-roller-card.gold-medal {
+    border-color: #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  }
+  .high-roller-card.silver-medal {
+    border-color: #C0C0C0;
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.6);
+  }
+  .high-roller-card.bronze-medal {
+    border-color: #CD7F32;
+    box-shadow: 0 0 8px rgba(205, 127, 50, 0.5);
   }
   .high-roller-card .card-title {
     margin-top: 0;
