@@ -12,14 +12,14 @@ class HighRollersController < ApplicationController
     @casino_user_stats = process_casino_transactions(casino_transactions)
   end
 
-  def fetch_all_casino_transactions()
+  def fetch_all_casino_transactions
     all_transactions = []
     page_number = 1
     page_size = 10_000
     base_url = "https://panopticon.cacheblasters.com/libcoin/transactions"
 
-    api_key = ENV['DEEPSTATE_PANOPTICON_KEY']
-    headers = { 'ApiKey' => api_key }
+    api_key = ENV["DEEPSTATE_PANOPTICON_KEY"]
+    headers = { "ApiKey" => api_key }
 
     hydra = Typhoeus::Hydra.new(max_concurrency: 5)
     client_batch_size = 5
@@ -66,7 +66,7 @@ class HighRollersController < ApplicationController
     end
 
     all_transactions.select do |transaction|
-      CASINO_MESSAGES.include?(transaction['transactionMessage'])
+      CASINO_MESSAGES.include?(transaction["transactionMessage"])
     end
   end
 
@@ -76,10 +76,10 @@ class HighRollersController < ApplicationController
     user_stats = {}
 
     transactions.each do |transaction|
-      user_id = transaction['receivingUser'].to_s
+      user_id = transaction["receivingUser"].to_s
       user_stats[user_id] ||= { winnings: 0, losses: 0 }
-      amount = transaction['amount'].to_i
-      case transaction['transactionMessage']
+      amount = transaction["amount"].to_i
+      case transaction["transactionMessage"]
       when WINNING_SLOTS_MESSAGE
         user_stats[user_id][:winnings] += amount
       when PLAYING_SLOTS_MESSAGE

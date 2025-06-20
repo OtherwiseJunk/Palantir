@@ -28,12 +28,12 @@ class PanopticonService
 
     request = Net::HTTP::Post.new(uri)
     request["Accept"] = "application/json"
-    request['Content-Type'] = 'application/json'
+    request["Content-Type"] = "application/json"
     request.body = {
       client_id: @auth0_client_id,
       client_secret: @auth0_client_secret,
       audience: @auth0_audience,
-      grant_type: @auth0_grant_type,
+      grant_type: @auth0_grant_type
     }.to_json
 
     response = http.request(request)

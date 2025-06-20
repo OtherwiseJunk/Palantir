@@ -5,8 +5,8 @@ class OutOfContextController < ApplicationController
     jwt = PANOPTICON_SERVICE.request_jwt
 
     response = HTTParty.get(
-      'https://panopticon.cacheblasters.com/ooc',
-      headers: { 'Authorization' => "Bearer #{jwt}" }
+      "https://panopticon.cacheblasters.com/ooc",
+      headers: { "Authorization" => "Bearer #{jwt}" }
     )
 
     if response.success?
@@ -26,7 +26,7 @@ class OutOfContextController < ApplicationController
 
       response = HTTParty.delete(
         "https://panopticon.cacheblasters.com/ooc/#{item_id}",
-        headers: { 'Authorization' => "Bearer #{jwt}" }
+        headers: { "Authorization" => "Bearer #{jwt}" }
       )
 
       if response.success?

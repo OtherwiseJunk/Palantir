@@ -5,7 +5,7 @@ class DiscordService
   LIBCRAFT_GUILD_ID = "698639095940907048"
   ADMIN_PERMISSION = 0x8
 
-  def initialize()
+  def initialize
     @bot_token = ENV["DISCORD_BOT_TOKEN"]
     @cache = {}
   end
@@ -68,17 +68,17 @@ class DiscordService
     if receiving_user_id.to_i.to_s == receiving_user_id
       transaction["receivingUser"] = if receiving_user_id == current_user.id.to_s
                                        "You"
-                                     else
+      else
                                        fetch_user_display_name(receiving_user_id)
-                                     end
+      end
     end
 
     if sending_user_id.to_i.to_s == sending_user_id
       transaction["sendingUser"] = if sending_user_id == current_user.id.to_s
                                      "You"
-                                   else
+      else
                                      fetch_user_display_name(sending_user_id)
-                                   end
+      end
     end
 
     puts "Receiving After: #{transaction["receivingUser"]}"
