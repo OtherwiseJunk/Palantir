@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get "libcoin_transactions/index"
-  get "errors/access_denied"
   get "dashboard/index"
   get "home/index"
   get "images/index"
