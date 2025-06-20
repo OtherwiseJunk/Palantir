@@ -1,7 +1,8 @@
 .nav-container {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    min-height: 100vh;
+    width: 90%;
 }
 
 .nav-container .header {
@@ -64,6 +65,7 @@
     margin-top: 30px;
     padding: 20px;
     width: calc(100% - 200px);
+    flex-grow: 1;
 }
 
 .ooc-gallery {

@@ -1,4 +1,4 @@
-<h1>High Rollers - Casino Leaderboard</h1>
+<h1 class="page-title">High Rollers - Casino Leaderboard</h1>
 
 <% if @casino_user_stats.empty? %>
   <p>No casino activity found to display.</p>
@@ -25,9 +25,13 @@
 <% end %>
 
 <style>
+  .page-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
   .high-rollers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 20px;
     padding: 20px 0;
   }
