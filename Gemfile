@@ -46,6 +46,7 @@ gem "omniauth-discord"
 gem "dotenv"
 gem 'omniauth-rails_csrf_protection'
 gem 'httparty'
+gem 'typhoeus'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -1,0 +1,52 @@
+<h1>High Rollers - Casino Leaderboard</h1>
+
+<% if @casino_user_stats.empty? %>
+  <p>No casino activity found to display.</p>
+<% else %>
+  <div class="high-rollers-grid">
+    <% @casino_user_stats.each do |stat| %>
+      <div class="high-roller-card">
+        <h3><%= stat[:display_name] %></h3>
+        <p>Winnings: <span class="stat-winnings"><%= stat[:winnings] %></span></p>
+        <p>Losses: <span class="stat-losses"><%= stat[:losses] %></span></p>
+        <p>Net: <span class="<%= stat[:net] >= 0 ? 'stat-winnings' : 'stat-losses' %>"><%= stat[:net] %></span></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<style>
+  .high-rollers-grid {
+    display: grid;
+    /* Creates responsive columns: as many as fit, each at least 250px wide */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Space between cards */
+    padding: 20px 0; /* Padding around the grid */
+  }
+  .high-roller-card {
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px;
+    background-color: #ffffff; /* White background for cards */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Subtle shadow */
+  }
+  .high-roller-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px; /* Space below title */
+    color: #333; /* Darker text for title */
+    font-size: 1.1em; /* Slightly smaller user ID */
+    word-break: break-all; /* Prevent long IDs from breaking layout */
+  }
+  .high-roller-card p {
+    margin: 8px 0;
+    font-size: 1em; /* Standard paragraph size */
+  }
+  .stat-winnings {
+    color: #28a745; /* Bootstrap success green */
+    font-weight: bold;
+  }
+  .stat-losses {
+    color: #dc3545; /* Bootstrap danger red */
+    font-weight: bold;
+  }
+</style>
