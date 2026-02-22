@@ -1,11 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/users.yml
+one:
+  email: one@example.com
+  # We generate a valid password hash so the user model is valid
+  encrypted_password: <%= User.new.tap { |u| u.password = 'password' }.encrypted_password %>
+  display_name: User One
+  profile_picture: default_avatar.png
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+two:
+  email: two@example.com
+  encrypted_password: <%= User.new.tap { |u| u.password = 'password' }.encrypted_password %>
+  display_name: User Two
+  profile_picture: default_avatar.png
