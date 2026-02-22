@@ -20,6 +20,14 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script>
+      // Apply saved theme early to prevent flash of wrong theme
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
   </head>
 
   <body>
@@ -27,6 +35,9 @@
       <div class="nav-container">
         <!-- Header -->
         <header class="header">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+            🌗 Theme
+          </button>
           <div class="user-info">
             <span class="username"><%= current_user.display_name %></span>
             <%= image_tag current_user.profile_picture, alt: 'Avatar', class: 'avatar' %>
@@ -53,5 +64,23 @@
         <%= yield %>
       </main>
     <% end %>
+
+    <script>
+      document.addEventListener("turbo:load", function() {
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function() {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (!theme) {
+              theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
+            } else {
+              theme = theme === 'dark' ? 'light' : 'dark';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+          });
+        }
+      });
+    </script>
   </body>
 </html>
