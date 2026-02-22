@@ -28,7 +28,7 @@
         <!-- Header -->
         <header class="header">
           <div class="user-info">
-            <%= image_tag current_user.profile_picture, alt: 'Avatar', class: 'avatar' %>
+            <%= image_tag(current_user.profile_picture.presence || "default-avatar.png", alt: 'Avatar', class: 'avatar') %>
             <span class="username"> <%= current_user.display_name %>!</span>
           </div>
         </header>
@@ -54,3 +54,4 @@
     <% end %>
   </body>
 </html>
+
