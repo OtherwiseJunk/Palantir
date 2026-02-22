@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -28,13 +28,14 @@
         <!-- Header -->
         <header class="header">
           <div class="user-info">
+            <span class="username"><%= current_user.display_name %></span>
             <%= image_tag current_user.profile_picture, alt: 'Avatar', class: 'avatar' %>
-            <span class="username"> <%= current_user.display_name %>!</span>
           </div>
         </header>
 
         <!-- Sidebar -->
         <aside class="sidebar">
+          <div class="sidebar-brand">Palantir</div>
           <ul>
             <li><%= link_to "Out Of Context", out_of_context_index_path %></li>
             <li><%= link_to "Libcoin Transactions", libcoin_transactions_index_path %></li>
